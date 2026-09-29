@@ -1,82 +1,143 @@
-Transforme este código mermaid em um mapa mental                               graph TD
-A[JAVA CORE] 
-	A --> B[Tratamento de Exceções]
-		B -->	C[Conceito]
-			C -->	D[Separa lógica principal do tratamento de erros]
-		B --> E[Hierarquia Throwable]
-		  E --> F[Error]
-	      F --> G[Falhas irrecuperáveis da JVM]
-				F -->	H[Exemplo OutOfMemoryError]
-				F --> I[Não tratar]
-		  E --> J[Exception]
-				J --> K[Erros recuperáveis do sistema]
-			 	J --> L[Tratar obrigatoriamente ou opcionalmente]
-		B --> M[Tipos de Exceções]
-				M--> O[Verificadas Checked]
-					O	--> P[Herdam de Exception]
-					O --> Q[Compilador obriga try catch ou throws]
-					O --> R[Ex Exceção IOException ou SQLException]
-			  M --> S[Não Verificadas Unchecked]
-					S --> T[Herdam de RuntimeException]
-					S --> U[Erros de lógica do programador]
-					S --> V[Ex NullPointerException ou ArithmeticException]
-  B --> W[Blocos de Controle]
-			W --> X[try Protege o código suscetível a erro]
-			W --> Y[catch Captura e trata exceções]
-			W --> Z[finally Sempre executa para limpeza]
-			W --> AA[try with resources Fecha recursos AutoCloseable automaticamente]
- B --> AB[Comandos]
-			AB --> AC[throw Lança a exceção no código]
-			AB --> AD[throws Declara exceção na assinatura do método]
-A --> AE[Reflection API Metaprogramação]
-		AE --> AF[Conceito]
-			AF --> AG[Analisa e manipula a estrutura em tempo de execução]
-		AE --> AH[Classe Class]
-			AH --> AI[Ponto de entrada principal]
-			AH --> AJ[Obtenção obj getClass ou NomeClasse class]
-		  AH --> AK[Obtenção Class forName pacote Classe]
-	  AE --> AL[Recursos Inspecionados]
-			AL --> AM[Atributos Field via getFields ou getDeclaredFields]
-			AL --> AN[Métodos Method via getMethods ou getDeclaredMethods]
-			AL --> AO[Modificadores via getModifiers]
-	  AE --> AP[Execução Dinâmica]
-			AP --> AQ[Invocação via method invoke objeto args]
-	  AE --> AR[Aplicações]
-			AR --> AS[Frameworks Spring e Hibernate]
-			AR --> AT[IDEs e Ferramentas de Teste JUnit]
-A --> AU[Generics]
-		AU --> AV[Conceito]
-			 AV --> AW[Tipos parametrizados para segurança na compilação]
-			 AV --> AX[Elimina casts manuais]
-		AU --> AY[Sintaxe]
-			 AY --> AZ[T Tipo]
-			 AY --> BA[E Elemento]
-			 AY --> BB[K e V Chave e Valor]
-		AU --> BC[Bounded Types]
-			 BC --> BD[T extends Number restringe para Number e subtipos]
-			 BC --> BE[Wildcards Curinga]
-		AU --> BF[Princípio PECS]
-			 BF --> BG[Producer Extends para leitura de dados]
-			 BF --> BH[Consumer Super para escrita de dados]
-		AU --> BI[Type Erasure]
-			 BI --> BJ[Tipos genéricos removidos na compilação]
-			 BI --> BK[Convertidos para Object ou limite no runtime]
-			 BI --> BL[Proibido new T ou arrays genéricos new T]
-A --> BM[Threads e Concorrência]
-		BM --> BN[Fundamentos]
-			BN --> BO[Processo Isolado com memória própria]
-			BN --> BP[Thread Fluxo dentro do processo]
-			BN --> BQ[Memória Compartilham Heap mas possuem Stack própria]
-	  BM --> BR[Criação e Controle]
-			BR --> BS[Implementar Runnable com Lambdas]
-			BR --> BT[Início obrigatório com t start]
-			BR --> BU[Controle sleep join e interrupt]
-		BM --> BV[Sincronização e Segurança]
-			BV --> BW[Race Condition Acesso simultâneo desordenado]
-			BV --> BX[volatile Garante visibilidade na memória principal]
-			BV --> BY[synchronized Trava acesso ao bloco ou método]
-		BM --> BZ[Concorrência Moderna]
-			BZ --> CA[Atômicos AtomicInteger sem trava via CPU]
-			BZ --> CB[Coleções ConcurrentHashMap e BlockingQueue]
-			BZ --> CC[Executors Thread Pools com ExecutorService]
-			BZ --> CD[Assíncrono CompletableFuture não bloqueante]
+🧠 JAVA CORE
+│
+├── ⚠️ 1. TRATAMENTO DE EXCEÇÕES
+│   │
+│   ├── Conceito
+│   │   └── Separa a lógica principal do tratamento de erros
+│   │
+│   ├── Hierarquia Throwable
+│   │   │
+│   │   ├── Error
+│   │   │   ├── Falhas irrecuperáveis da JVM
+│   │   │   ├── Ex.: OutOfMemoryError
+│   │   │   └── Não tratar
+│   │   │
+│   │   └── Exception
+│   │       ├── Erros recuperáveis do sistema
+│   │       └── Tratamento obrigatório ou opcional
+│   │
+│   ├── Tipos de Exceções
+│   │   │
+│   │   ├── Checked (Verificadas)
+│   │   │   ├── Herdam de Exception
+│   │   │   ├── Compilador exige try/catch ou throws
+│   │   │   └── Ex.: IOException, SQLException
+│   │   │
+│   │   └── Unchecked (Não Verificadas)
+│   │       ├── Herdam de RuntimeException
+│   │       ├── Erros de lógica do programador
+│   │       └── Ex.: NullPointerException, ArithmeticException
+│   │
+│   ├── Blocos de Controle
+│   │   ├── try → protege código suscetível a erro
+│   │   ├── catch → captura e trata exceções
+│   │   ├── finally → executa sempre para limpeza
+│   │   └── try-with-resources
+│   │       └── Fecha recursos AutoCloseable automaticamente
+│   │
+│   └── Comandos
+│       ├── throw → lança exceção no código
+│       └── throws → declara exceção na assinatura do método
+│
+├── 🔍 2. REFLECTION API
+│   │   └── Metaprogramação
+│   │
+│   ├── Conceito
+│   │   └── Analisa e manipula estruturas em tempo de execução
+│   │
+│   ├── Classe Class
+│   │   ├── Ponto de entrada principal
+│   │   ├── getClass()
+│   │   ├── NomeClasse.class
+│   │   └── Class.forName("pacote.Classe")
+│   │
+│   ├── Recursos Inspecionados
+│   │   ├── Field → atributos
+│   │   │   ├── getFields()
+│   │   │   └── getDeclaredFields()
+│   │   ├── Method → métodos
+│   │   │   ├── getMethods()
+│   │   │   └── getDeclaredMethods()
+│   │   └── Modificadores
+│   │       └── getModifiers()
+│   │
+│   ├── Execução Dinâmica
+│   │   └── Method.invoke(objeto, args)
+│   │
+│   └── Aplicações
+│       ├── Frameworks
+│       │   ├── Spring
+│       │   └── Hibernate
+│       └── IDEs e ferramentas de teste
+│           └── JUnit
+│
+├── 🧩 3. GENERICS
+│   │
+│   ├── Conceito
+│   │   ├── Tipos parametrizados
+│   │   ├── Segurança na compilação
+│   │   └── Elimina casts manuais
+│   │
+│   ├── Sintaxe
+│   │   ├── T → Tipo
+│   │   ├── E → Elemento
+│   │   └── K / V → Chave / Valor
+│   │
+│   ├── Bounded Types
+│   │   ├── T extends Number
+│   │   │   └── Restringe para Number e subtipos
+│   │   └── Wildcards
+│   │       └── Curinga (?)
+│   │
+│   ├── Princípio PECS
+│   │   ├── Producer → Extends
+│   │   │   └── Usado para leitura
+│   │   └── Consumer → Super
+│   │       └── Usado para escrita
+│   │
+│   └── Type Erasure
+│       ├── Tipos genéricos removidos na compilação
+│       ├── Convertidos para Object ou limite no runtime
+│       └── Restrições
+│           ├── ❌ new T
+│           └── ❌ arrays genéricos new T[]
+│
+└── ⚙️ 4. THREADS E CONCORRÊNCIA
+    │
+    ├── Fundamentos
+    │   ├── Processo
+    │   │   └── Isolado e com memória própria
+    │   ├── Thread
+    │   │   └── Fluxo de execução dentro do processo
+    │   └── Memória
+    │       ├── Threads compartilham Heap
+    │       └── Cada Thread possui Stack própria
+    │
+    ├── Criação e Controle
+    │   ├── Runnable
+    │   │   └── Pode ser implementado com Lambdas
+    │   ├── start()
+    │   │   └── Início da Thread
+    │   └── Controle
+    │       ├── sleep()
+    │       ├── join()
+    │       └── interrupt()
+    │
+    ├── Sincronização e Segurança
+    │   ├── Race Condition
+    │   │   └── Acesso simultâneo desordenado
+    │   ├── volatile
+    │   │   └── Garante visibilidade na memória principal
+    │   └── synchronized
+    │       └── Trava acesso ao bloco ou método
+    │
+    └── Concorrência Moderna
+        ├── Atômicos
+        │   └── AtomicInteger → operações sem trava via CPU
+        ├── Coleções concorrentes
+        │   ├── ConcurrentHashMap
+        │   └── BlockingQueue
+        ├── Executors
+        │   └── Thread Pools → ExecutorService
+        └── Assíncrono
+            └── CompletableFuture → não bloqueante
